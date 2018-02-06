@@ -74,7 +74,7 @@ public interface InterfaceCrud<T> extends Serializable {
 
     Long totalRegistro(String table) throws Exception;
 
-    Query obterQuery(String query) throws Exception;
+    Query obterQuery(String query) throws Exception;    
 
     //encarregado por trabalhar com carregamento dinamico
     List<T> findListQueryDinamica(String query, int iniciaNoRegistro, int maximoResultado) throws Exception;
