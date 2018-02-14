@@ -28,7 +28,7 @@ public class HibernateUtil implements Serializable {
     private static SessionFactory sessionFactory = buildSessionFactory();
 
     /**
-     * responsavel por ler o arquivo de configuyracao hibernate.cfg.xml
+     * responsavel por ler o arquivo de configuracao hibernate.cfg.xml
      *
      * @return SessionFactory
      */
