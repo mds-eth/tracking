@@ -32,7 +32,7 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 	private SimpleJdbcTemplateImpl simpleJdbcTemplate;
 
 	@Autowired
-	private SimpleJdbcInsertImplents simpleJdbcInsert;
+	private SimpleJdbcInsertImpl simpleJdbcInsert;
 
 	@Autowired
 	private SimpleJdbcTemplateImpl simpleJdbcTemplateImpl;
