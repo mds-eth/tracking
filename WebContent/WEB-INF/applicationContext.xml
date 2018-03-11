@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schame/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
-	 http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-		http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-		http://www.springframework.org/schema/context
-		http://www.springframework.org/schema/context/spring-context-2.0.xsd
-		http://www.springframework.org/schema/tx
-		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+	http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
 	default-lazy-init="true">
 
 	<context:annotation-config />
@@ -20,6 +18,7 @@
 
 	<mvc:resources location="/resources/img" mapping="/resources/**"
 		cache-period="5000" />
+
 
 	<context:component-scan base-package="br.com.project.geral.controller" />
 	<context:component-scan base-package="br.com.srv.interfaces" />
@@ -34,7 +33,6 @@
 	<context:component-scan base-package="br.com.framework.controller.crud" />
 	<context:component-scan base-package="br.com.framework.interfac.crud" />
 
-
 	<!-- Data Source -->
 	<bean id="springDataSource" name="springDataSource"
 		class="org.springframework.jndi.JndiObjectFactoryBean" lazy-init="false">
@@ -42,6 +40,7 @@
 			<value>java:comp/env/jdbc/datasource</value>
 		</property>
 	</bean>
+
 	<bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate"
 		lazy-init="false">
 		<property name="dataSource" ref="springDataSource" />
@@ -50,8 +49,9 @@
 		<property name="sqlMigrationPrefix" value="v" />
 		<property name="sqlMigrationSeparator" value="_" />
 		<property name="encoding" value="ISO-8859-1" />
-		<property name="validateMigrate" value="true" />
+		<property name="validateOnMigrate" value="true" />
 	</bean>
+
 
 	<bean id="transactionManager" name="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
@@ -59,7 +59,7 @@
 		<property name="dataSource" ref="springDataSource" />
 	</bean>
 
-	<bean id="jdbcTemplate" name="jdbcTemplate"
+	<bean id="jdbcTemlate" name="jdbcTemlate"
 		class="br.com.framework.implementacao.crud.JdbcTemplateImpl">
 		<constructor-arg name="dataSource" ref="springDataSource" />
 	</bean>
@@ -69,13 +69,16 @@
 		<constructor-arg name="dataSource" ref="springDataSource" />
 	</bean>
 
+
 	<bean id="simpleJdbcInsert" name="simpleJdbcInsert"
-		class="br.com.framework.implementacao.crud.SimpleJdbcInsertImpl">
+		class="br.com.framework.implementacao.crud.SimpleJdbcInsertImpl"
+		lazy-init="false">
 		<constructor-arg name="dataSource" ref="springDataSource" />
 	</bean>
 
 	<bean id="simpleJdbcClassImpl" name="simpleJdbcClassImpl"
-		class="br.com.framework.implementacao.crud.SimpleJdbcClassImpl">
+		class="br.com.framework.implementacao.crud.SimpleJdbcClassImpl"
+		lazy-init="false">
 		<constructor-arg name="dataSource" ref="springDataSource" />
 	</bean>
 
@@ -83,11 +86,12 @@
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"
 		lazy-init="false">
 		<property name="mappings">
-			<props key="/index.jsp">
-				indexController
+			<props>
+				<prop key="/index.jsp">indexController</prop>
 			</props>
 		</property>
 	</bean>
+
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
@@ -98,9 +102,10 @@
 		<property name="suffix" value="*.jsf, *.xhtml, *.html, *.jsp, *.js" />
 	</bean>
 
+
 	<bean name="indexController" lazy-init="false"
-		class="org.springframework.web.servlet.mvc.ParameterizableViewScope">
-	</bean>
+		class="org.springframework.web.servlet.mvc.ParameterizableViewController" />
+
 
 	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer"
 		lazy-init="false">
@@ -113,9 +118,11 @@
 		</property>
 	</bean>
 
-	<bean id="reporUtil" class="br.com.project.report.util.ReportUtil" />
+
+	<bean id="reportUtil" class="br.com.project.report.util.ReportUtil" />
 	<bean id="utilFramework" class="br.com.framework.utils.UtilFramework"
 		scope="session" />
 
+
+
 </beans>
-		

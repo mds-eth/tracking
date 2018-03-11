@@ -4,11 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
 @Audited
 @Entity
+@Table(name= "entidade")
 public class Entidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -45,7 +45,7 @@ public class FilterOpenSessionInView extends DelegatingFilterProxy implements Se
 			FilterChain chain) throws ServletException, IOException {
 		
 		// JDBC SPring
-		BasicDataSource  sprinBasicDataSource = (BasicDataSource) ContextLoaderListenerCaixakiUtils.getBean("springDataSoruce");
+		BasicDataSource  sprinBasicDataSource = (BasicDataSource) ContextLoaderListenerCaixakiUtils.getBean("springDataSource");
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		PlatformTransactionManager transactionManager = new DataSourceTransactionManager(sprinBasicDataSource);
 		TransactionStatus status = transactionManager.getTransaction(def);
